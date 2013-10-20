@@ -169,8 +169,8 @@ __kernel void morph(__global const GENTYPE * restrict src,
     int y = get_group_id(1)*LSIZE1;
     int start_x = x+src_offset_x-RADIUSX;
     int end_x = x + src_offset_x+LSIZE0+RADIUSX;
-    int width = end_x -(x+src_offset_x-RADIUSX)+1;
-    int start_y = y+src_offset_y-RADIUSY;
+    int width = end_x - start_x + 1; //calc width of read data
+    int start_y = y+src_offset_y-RADIUSY;// position of read data is start_x,start_y
     int point1 = mad24(l_y,LSIZE0,l_x);
     int point2 = point1 + LSIZE0*LSIZE1;
     int tl_x = point1 % width;
